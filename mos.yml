@@ -1,5 +1,5 @@
 author: DEVICE-FARM
-description: Two channels water mix with three way valves, two LM75A and one two GPO registers
+description: Two channels water mix with three way valves, two LM75A and two GPO registers
 version: 1.0
 arch: esp8266
 
@@ -38,8 +38,9 @@ config_schema:
   - ["mix.channel0.cw", "i", 2, {"title": "SSR CW PCF8574 channel number"}]
   - ["mix.channel0.pump", "i", 3, {"title": "Pump PCF8574 channel number"}]
   - ["mix.channel0.lm", "i", 0x48, {"title": "LM75A address"}]
-  - ["mix.channel0.runMsC", "i", 500, {"title": "Temperature difference to run time ration in ms/Celsius"}]
-  - ["mix.channel0.waitSec", "i", 10, {"title": "Wait specified number of seconds after run"}]
+  - ["mix.channel0.runMsC", "i", 1000, {"title": "Temperature difference to run time ration in ms/Celsius"}]
+  - ["mix.channel0.runMaxSec", "i", 10, {"title": "Maximum run time in seconds"}]
+  - ["mix.channel0.waitSec", "i", 30, {"title": "Wait specified number of seconds after run"}]
 
   - ["mix.channel1", "o", {"title": "Channel 1 settings"}]
   - ["mix.channel1.enabled", "b", true, {"title": "Is thermostat enabled?"}]
@@ -49,7 +50,8 @@ config_schema:
   - ["mix.channel1.cw", "i", 5, {"title": "SSR CW PCF8574 channel number"}]
   - ["mix.channel1.pump", "i", 6, {"title": "Pump PCF8574 channel number"}]
   - ["mix.channel1.lm", "i", 0x49, {"title": "LM75A address"}]
-  - ["mix.channel1.runMsC", "i", 500, {"title": "Temperature difference to run time ration in ms/Celsius"}]
-  - ["mix.channel1.waitSec", "i", 10, {"title": "Wait specified number of seconds after run"}]
+  - ["mix.channel1.runMsC", "i", 1000, {"title": "Temperature difference to run time ration in ms/Celsius"}]
+  - ["mix.channel1.runMaxSec", "i", 10, {"title": "Maximum run time in seconds"}]
+  - ["mix.channel1.waitSec", "i", 30, {"title": "Wait specified number of seconds after run"}]
 
 
