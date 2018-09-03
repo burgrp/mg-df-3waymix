@@ -1,0 +1,55 @@
+author: DEVICE-FARM
+description: Two channels water mix with three way valves, two LM75A and one two GPO registers
+version: 1.0
+arch: esp8266
+
+tags:
+  - c
+
+sources:
+  - src
+
+filesystem:
+  - fs
+
+libs:
+  - origin: ../mg-df-core
+  - origin: ../mg-df-lm75a
+  - origin: ../mg-df-pcf8574
+  
+manifest_version: 2017-09-29
+
+config_schema:
+  - ["i2c.enable", true]
+  - ["i2c.debug", true]
+
+  - ["mix", "o", {"title": "Common settings"}]
+  - ["mix.led", "i", 4, {"title": "LED pin number"}]
+  - ["mix.pcf", "i", 0x38, {"title": "PCF8574 address"}]
+  - ["mix.tickms", "i", 2000, {"title": "Tick period in ms"}]
+  - ["mix.gpo0", "i", 0, {"title": "GPO0 PCF8574 channel number"}]
+  - ["mix.gpo1", "i", 7, {"title": "GPO1 PCF8574 channel number"}]
+
+  - ["mix.channel0", "o", {"title": "Channel 0 settings"}]
+  - ["mix.channel0.enabled", "b", true, {"title": "Is thermostat enabled?"}]
+  - ["mix.channel0.target", "i", 20, {"title": "Target temperature in Celsius"}]
+  - ["mix.channel0.max", "i", 50, {"title": "Maximum target temperature in Celsius"}]
+  - ["mix.channel0.ccw", "i", 1, {"title": "SSR CCW PCF8574 channel number"}]
+  - ["mix.channel0.cw", "i", 2, {"title": "SSR CW PCF8574 channel number"}]
+  - ["mix.channel0.pump", "i", 3, {"title": "Pump PCF8574 channel number"}]
+  - ["mix.channel0.lm", "i", 0x48, {"title": "LM75A address"}]
+  - ["mix.channel0.runMsC", "i", 500, {"title": "Temperature difference to run time ration in ms/Celsius"}]
+  - ["mix.channel0.waitSec", "i", 10, {"title": "Wait specified number of seconds after run"}]
+
+  - ["mix.channel1", "o", {"title": "Channel 1 settings"}]
+  - ["mix.channel1.enabled", "b", true, {"title": "Is thermostat enabled?"}]
+  - ["mix.channel1.target", "i", 20, {"title": "Target temperature in Celsius"}]
+  - ["mix.channel1.max", "i", 50, {"title": "Maximum target temperature in Celsius"}]
+  - ["mix.channel1.ccw", "i", 4, {"title": "SSR CCW PCF8574 channel number"}]
+  - ["mix.channel1.cw", "i", 5, {"title": "SSR CW PCF8574 channel number"}]
+  - ["mix.channel1.pump", "i", 6, {"title": "Pump PCF8574 channel number"}]
+  - ["mix.channel1.lm", "i", 0x49, {"title": "LM75A address"}]
+  - ["mix.channel1.runMsC", "i", 500, {"title": "Temperature difference to run time ration in ms/Celsius"}]
+  - ["mix.channel1.waitSec", "i", 10, {"title": "Wait specified number of seconds after run"}]
+
+
