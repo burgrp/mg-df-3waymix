@@ -76,7 +76,7 @@ for (let c = 0; c < 2; c++) {
         waitSec: Cfg.get("mix.channel" + cStr + ".waitSec"),
         blocked: false,
         check: function() {
-            //print("Updating mix", c, this.actual.value, this.target.value, this.enabled.value, this.blocked, this.max, this.outCcw, this.outCw, this.pump.value);           
+            print("Updating mix", c, this.actual.value, this.target.value, this.enabled.value, this.blocked, this.max, this.outCcw, this.outCw, this.pump.value);           
 
             pcfOut[this.outPump] = this.enabled.value && this.pump.value;
 
@@ -84,7 +84,9 @@ for (let c = 0; c < 2; c++) {
                 this.enabled.value &&
                 this.pump.value && 
                 this.target.value !== null && 
+                this.target.value !== undefined && 
                 this.actual.value !== null && 
+                this.actual.value !== undefined && 
                 !this.blocked
             ) {
                 
@@ -95,7 +97,7 @@ for (let c = 0; c < 2; c++) {
                 }
 
                 let runMs = (target - this.actual.value) * this.runMsC;
-                let dir = runMs > 0;
+                let dir = runMs < 0;
                 runMs = Math.abs(runMs);
                 
                 if (runMs > 500) {
