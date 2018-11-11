@@ -37,8 +37,8 @@ let gpos = [];
 for (let c = 0; c < 2; c++) {
     let cStr = JSON.stringify(c);
     gpos[c] = {
-        register: Register.add("gpo" + cStr, RegisterVariable.create(false)),
-        channel: Cfg.get("mix.gpo" + cStr)
+        register: Register.add(Cfg.get("mix.gpo" + cStr + ".name"), RegisterVariable.create(false)),
+        channel: Cfg.get("mix.gpo" + cStr + ".channel")
     } 
 }
 
@@ -49,24 +49,26 @@ for (let c = 0; c < 2; c++) {
     let lmAddress = Cfg.get("mix.channel" + cStr + ".lm");
     print("LM75A channel", c, "address:", lmAddress);
 
+    let regPrefix = Cfg.get("mix.channel" + cStr + ".prefix");
+
     mixs[c] = {        
         index: c,
-        enabled: Register.add("enabled" + cStr, RegisterConfig.create("mix.channel" + cStr + ".enabled", function(v) {
+        enabled: Register.add(regPrefix + "enabled", RegisterConfig.create("mix.channel" + cStr + ".enabled", function(v) {
             let root = { mix: {} };
             root.mix["channel" + JSON.stringify(this.mix.index)] = {
                 enabled: v
             };
             return root;
         })),
-        target: Register.add("target" + cStr, RegisterConfig.create("mix.channel" + cStr + ".target", function(v) {
+        target: Register.add(regPrefix + "target", RegisterConfig.create("mix.channel" + cStr + ".target", function(v) {
             let root = { mix: {} };
             root.mix["channel" + JSON.stringify(this.mix.index)] = {
                 target: v
             };
             return root;
         })),
-        pump: Register.add("pump" + cStr, RegisterVariable.create(true)),
-        actual: Register.add("actual" + cStr, RegisterLM75A.create(lmAddress, i2c)),
+        pump: Register.add(regPrefix + "pump", RegisterVariable.create(true)),
+        actual: Register.add(regPrefix + "actual", RegisterLM75A.create(lmAddress, i2c)),
         max: Cfg.get("mix.channel" + cStr + ".max"),
         outCcw: Cfg.get("mix.channel" + cStr + ".ccw"),
         outCw: Cfg.get("mix.channel" + cStr + ".cw"),

@@ -11,26 +11,32 @@ sources:
 
 filesystem:
   - fs
+  - fs-build
 
 libs:
   - origin: ../mg-df-core
   - origin: ../mg-df-lm75a
   - origin: ../mg-df-pcf8574
   
-manifest_version: 2017-09-29
-
 config_schema:
   - ["i2c.enable", true]
   - ["i2c.debug", true]
 
   - ["mix", "o", {"title": "Common settings"}]
-  - ["mix.led", "i", 4, {"title": "LED pin number"}]
   - ["mix.pcf", "i", 0x38, {"title": "PCF8574 address"}]
   - ["mix.tickms", "i", 2000, {"title": "Tick period in ms"}]
-  - ["mix.gpo0", "i", 0, {"title": "GPO0 PCF8574 channel number"}]
-  - ["mix.gpo1", "i", 7, {"title": "GPO1 PCF8574 channel number"}]
+  - ["mix.led", "i", 4, {"title": "LED pin number"}]
+
+  - ["mix.gpo0", "o", {"title": "GPO0 settings"}]
+  - ["mix.gpo0.name", "s", "3waymix.gpo0", {"title": "Register name"}]
+  - ["mix.gpo0.channel", "i", 0, {"title": "PCF8574 channel number"}]
+
+  - ["mix.gpo1", "o", {"title": "GPO1 settings"}]
+  - ["mix.gpo1.name", "s", "3waymix.gpo1", {"title": "Register name"}]
+  - ["mix.gpo1.channel", "i", 7, {"title": "PCF8574 channel number"}]
 
   - ["mix.channel0", "o", {"title": "Channel 0 settings"}]
+  - ["mix.channel0.prefix", "s", "3waymix.channel0.", {"title": "Register name prefix"}]  
   - ["mix.channel0.enabled", "b", true, {"title": "Is thermostat enabled?"}]
   - ["mix.channel0.target", "i", 20, {"title": "Target temperature in Celsius"}]
   - ["mix.channel0.max", "i", 50, {"title": "Maximum target temperature in Celsius"}]
@@ -43,6 +49,7 @@ config_schema:
   - ["mix.channel0.waitSec", "i", 30, {"title": "Wait specified number of seconds after run"}]
 
   - ["mix.channel1", "o", {"title": "Channel 1 settings"}]
+  - ["mix.channel1.prefix", "s", "3waymix.channel1.", {"title": "Register name prefix"}]  
   - ["mix.channel1.enabled", "b", true, {"title": "Is thermostat enabled?"}]
   - ["mix.channel1.target", "i", 20, {"title": "Target temperature in Celsius"}]
   - ["mix.channel1.max", "i", 50, {"title": "Maximum target temperature in Celsius"}]
@@ -54,4 +61,4 @@ config_schema:
   - ["mix.channel1.runMaxSec", "i", 10, {"title": "Maximum run time in seconds"}]
   - ["mix.channel1.waitSec", "i", 30, {"title": "Wait specified number of seconds after run"}]
 
-
+manifest_version: 2017-09-29
