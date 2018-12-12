@@ -1,22 +1,14 @@
 author: DEVICE-FARM
 description: Two channels water mix with three way valves, two LM75A and two GPO registers
 version: 1.0
-arch: esp8266
-
-tags:
-  - c
-
-sources:
-  - src
 
 filesystem:
   - fs
-  - fs-build
 
 libs:
-  - origin: ../mg-df-core
-  - origin: ../mg-df-lm75a
-  - origin: ../mg-df-pcf8574
+  - origin: ../../mg-df-core
+  - origin: ../../mg-df-lm75a
+  - origin: ../../mg-df-pcf8574
   
 config_schema:
   - ["i2c.enable", true]
